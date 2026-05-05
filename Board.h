@@ -1,3 +1,3 @@
 #pragma once //do not delete this line
 
-//board+gem
+//board ไม่ต้องเขียนgemแล้ว คีย์เขียนละ
