@@ -10,7 +10,7 @@ void Gamemanager::loadDevelopmentCards(Cardgroup& deck) {
     std::string line;
 
     if (!file.is_open()) {
-        std::cout << "❌ หาไฟล์ dev_cards.csv ไม่เจอ!" << std::endl;
+        std::cout << "หาไฟล์ dev_cards.csv ไม่เจอ" << std::endl;
         return;
     }
 
@@ -57,7 +57,7 @@ void Gamemanager::loadDevelopmentCards(Cardgroup& deck) {
     }
 
     file.close();
-    std::cout << "✅ โหลดไพ่พัฒนาเสร็จสิ้น" << std::endl;
+    std::cout << "โหลดไพ่พัฒนาเสร็จสิ้น" << std::endl;
 }
 
 void Gamemanager::loadNobiltyCards(std::vector<NobilityCard>& nobleList){
@@ -65,7 +65,7 @@ void Gamemanager::loadNobiltyCards(std::vector<NobilityCard>& nobleList){
     std::string line;
 
     if (!file.is_open()) {
-        std::cout << "❌ หาไฟล์ nob_cards.csv ไม่เจอ!" << std::endl;
+        std::cout << "หาไฟล์ nob_cards.csv ไม่เจอ" << std::endl;
         return;
     }
 
@@ -98,7 +98,7 @@ void Gamemanager::loadNobiltyCards(std::vector<NobilityCard>& nobleList){
     }
 
     file.close();
-    std::cout << "✅ โหลดไพ่ขุนนางเสร็จสิ้น" << std::endl;
+    std::cout << "โหลดไพ่ขุนนางเสร็จสิ้น" << std::endl;
 
 }
 
