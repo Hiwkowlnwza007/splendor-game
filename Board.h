@@ -6,7 +6,7 @@
 class Board{
     private:
         Gem board_gem;
-        std::vector<NobilityCard> board_noblility;
+        std::vector<NobilityCard> board_nobility;
         std::vector<DevelopmentCard> board_development;
         //std::vector<Deck> board_deck;
 
