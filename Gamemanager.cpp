@@ -1,6 +1,7 @@
 #include "Gamemanager.h"
 
 void Gamemanager::setupgame(){
+    
     //setupcode
 }
 
