@@ -16,3 +16,5 @@ df = pd.read_excel('data_of_card.xlsx', sheet_name='nob_card')
 df.to_csv('nob_cards.csv', index=False) 
 
 print("แปลงไฟล์ไพ่ขุนนางเสร็จเรียบร้อย พร้อมให้ C++ ใช้งาน")
+
+#เวลารันให้เขียนเขียน pip install pandas openpyxl ตามด้วย py converter.py เพื่อให้มันทำงานได้ครับ
