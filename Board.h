@@ -13,4 +13,5 @@ class Board{
     public:
         bool gemmanagement(std::string Action, Gem g);
         void replacecard();
+        void setupGems(int num_player);
 };

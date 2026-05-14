@@ -2,6 +2,10 @@
 #include <iostream>
 #include <fstream>   // ตัวอ่านไฟล์
 #include <sstream>   // ตัวหั่นข้อความ
+#include <limits> // ต้องมีอันนี้สำหรับท่าไม้กวาดกวาดขยะ
+#include <algorithm>
+#include <random>
+#include <chrono>
 #include <string>
 #include <vector>
 
@@ -103,7 +107,36 @@ void Gamemanager::loadNobiltyCards(std::vector<NobilityCard>& nobleList){
 }
 
 void Gamemanager::setupgame(){
-    
+    //รับค่าจำนวนคน
+    int num_player;
+    while(true){
+        std::cout << "Please enter the number of player [1-4] : ";
+        std::cin >>num_player;
+        if(std::cin.fail() || num_player < 1 || num_player > 4){
+            std::cout << "Wrong number of player" << std::endl;
+            std::cin.clear();
+            //std::cin.ignore( จำนวนสูงสุดที่จะกวาด , สัญลักษณ์ที่จะให้หยุดกวาด );
+            //std::numeric_limits<std::streamsize>::max()บอกว่าเอาจนอนันต์
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            continue;
+        }
+
+        break;
+    }
+    //ตั้งชื่อ
+    for(int i=0;i<num_player;++i){
+        std::string tempname;
+        std::cout << "Enter name for Player " <<(i+1)<<" : ";
+        std::cin >> tempname;
+
+        Player newplayer;
+        newplayer.setname(tempname);
+        players.push_back(newplayer);
+    }
+
+    //สับไพ่
+
     //setupcode
 }
 
