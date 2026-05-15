@@ -1,13 +1,13 @@
 #include "Board.h"
 //board+gem
-Board::Board(){
-    board_gem.White = 7;
-    board_gem.Blue = 7;
-    board_gem.Green = 7;
-    board_gem.Red = 7;
-    board_gem.Black = 7;
-    board_gem.Gold = 5;
-}
+// Board::Board(){
+//     board_gem.White = 7;
+//     board_gem.Blue = 7;
+//     board_gem.Green = 7;
+//     board_gem.Red = 7;
+//     board_gem.Black = 7;
+//     board_gem.Gold = 5;
+// }
 
 bool Board::gemmanagement(std::string Action, Gem g){
     if(Action == "take"){
@@ -41,3 +41,29 @@ bool Board::gemmanagement(std::string Action, Gem g){
 void Board::replacecard(){
 
 }
+//อันนี้setupgemบนboard ละก็commentอันเก่าไว้นะ เผื่อใข้ -Key
+void Board::setupGems(int num_player) {
+        if (num_player == 2) {
+            board_gem.White = 4;
+            board_gem.Blue = 4;
+            board_gem.Green = 4;
+            board_gem.Red = 4;
+            board_gem.Black = 4;
+        } 
+        else if (num_player == 3) {
+            board_gem.White = 5;
+            board_gem.Blue = 5;
+            board_gem.Green = 5;
+            board_gem.Red = 5;
+            board_gem.Black = 5;
+        } 
+        else if (num_player == 4) {
+            board_gem.White = 7;
+            board_gem.Blue = 7;
+            board_gem.Green = 7;
+            board_gem.Red = 7;
+            board_gem.Black = 7;
+        }
+        
+        board_gem.Gold = 5; 
+    }

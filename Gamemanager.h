@@ -5,6 +5,12 @@
 
 class Gamemanager{
 private:
+    void loadDevelopmentCards(Cardgroup& deck);
+    void loadNobiltyCards(std::vector<NobilityCard>& nobleList);
+    void addNobilityCard(NobilityCard card) {
+            AllNobilitycards.push_back(card);
+    }
+    std::vector<NobilityCard> AllNobilitycards;
     std::vector<Player> players;
     Board board;
     bool isgameover = false;
