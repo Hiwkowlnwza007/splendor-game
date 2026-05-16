@@ -11,6 +11,7 @@ class Board{
         std::vector<DevelopmentCard> board_development_tier1;
         std::vector<DevelopmentCard> board_development_tier2;
         std::vector<DevelopmentCard> board_development_tier3;
+        Deck board_deck_tier1;
         Deck board_deck_tier2;
         Deck board_deck_tier3;
 
