@@ -1,4 +1,5 @@
 #include "Board.h"
+
 //board+gem
 // Board::Board(){
 //     board_gem.White = 7;
@@ -11,12 +12,12 @@
 
 bool Board::gemmanagement(std::string Action, Gem g){
     if(Action == "take"){
-        if(board_gem.White < g.White){} return false;
-        if(board_gem.Blue < g.Blue){} return false;
-        if(board_gem.Green < g.Green){} return false;
-        if(board_gem.Red < g.Red){} return false;
-        if(board_gem.Black < g.Black){} return false;
-        if(board_gem.Gold < g.Gold){} return false;
+        if(board_gem.White < g.White) return false;
+        if(board_gem.Blue < g.Blue) return false;
+        if(board_gem.Green < g.Green) return false;
+        if(board_gem.Red < g.Red) return false;
+        if(board_gem.Black < g.Black) return false;
+        if(board_gem.Gold < g.Gold) return false;
 
         board_gem.White -= g.White;
         board_gem.Blue -= g.Blue;
@@ -36,10 +37,11 @@ bool Board::gemmanagement(std::string Action, Gem g){
         board_gem.Gold += g.Gold;
         return true;
     }
+    return false;
 }
 
-void Board::replacecard(){
-
+void Board::replacecard(int tier, int index){
+    
 }
 //อันนี้setupgemบนboard ละก็commentอันเก่าไว้นะ เผื่อใข้ -Key
 void Board::setupGems(int num_player) {
@@ -67,3 +69,40 @@ void Board::setupGems(int num_player) {
         
         board_gem.Gold = 5; 
     }
+
+void Board::setupCards(std::vector<DevelopmentCard>& tier1,
+                       std::vector<DevelopmentCard>& tier2,
+                       std::vector<DevelopmentCard>& tier3,
+                       std::vector<NobilityCard>& nobilityCards,
+                       int num_player)
+{
+    board_nobility.clear();
+    board_development_tier1.clear();
+    board_development_tier2.clear();
+    board_development_tier3.clear();
+
+    int nobleCount = num_player + 1;
+
+    for(int i=0; i<nobleCount; i++){
+        board_nobility.push_back(nobilityCards.back());
+        nobilityCards.pop_back();
+    }
+
+    for(int i=0; i<4; i++){
+        board_development_tier1.push_back(tier1.back());
+        tier1.pop_back();
+
+        board_development_tier2.push_back(tier2.back());
+        tier2.pop_back();
+
+        board_development_tier3.push_back(tier3.back());
+        tier3.pop_back();
+    }
+}
+
+void Board::displayBoard() {
+    std::cout << "Gems on Board: " << std::endl;
+    std::cout << "White: " << board_gem.White << ", Blue: " << board_gem.Blue 
+              << ", Green: " << board_gem.Green << ", Red: " << board_gem.Red 
+              << ", Black: " << board_gem.Black << ", Gold: " << board_gem.Gold << std::endl;
+}

@@ -6,7 +6,7 @@
 class Gamemanager{
 private:
     void loadDevelopmentCards(Cardgroup& deck);
-    void loadNobiltyCards(std::vector<NobilityCard>& nobleList);
+    void loadNobiltyCards();
     void addNobilityCard(NobilityCard card) {
             AllNobilitycards.push_back(card);
     }
@@ -15,6 +15,7 @@ private:
     Board board;
     bool isgameover = false;
     int nowplayerindex = 0;
+    int num_player;
 public:
     void setupgame();
     void startgame();
