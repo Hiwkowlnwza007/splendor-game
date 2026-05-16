@@ -3,6 +3,7 @@
 #include "Cardgroup.h"
 #include <vector>
 #include <string>
+#include <iostream>
 //board ไม่ต้องเขียนgemแล้ว คีย์เขียนละ
 class Board{
     private:
@@ -24,4 +25,15 @@ class Board{
             std::vector<DevelopmentCard>& tier3, 
             std::vector<NobilityCard>& nobilityCards, 
             int num_player);
+        void displayBoard(); //แสดงสถานะของboard
+        int GetWhite() const { return board_gem.White; }
+        int GetBlue() const { return board_gem.Blue; }
+        int GetGreen() const { return board_gem.Green; }
+        int GetRed() const { return board_gem.Red; }
+        int GetBlack() const { return board_gem.Black; }
+        int GetGold() const { return board_gem.Gold; }
+        std::vector<NobilityCard> GetNobilityCards() const { return board_nobility; }
+        std::vector<DevelopmentCard> GetDevelopmentTier1() const { return board_development_tier1; }
+        std::vector<DevelopmentCard> GetDevelopmentTier2() const { return board_development_tier2; }
+        std::vector<DevelopmentCard> GetDevelopmentTier3() const { return board_development_tier3; }
 };
