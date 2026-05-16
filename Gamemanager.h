@@ -6,7 +6,7 @@
 class Gamemanager{
 private:
     void loadDevelopmentCards(Cardgroup& deck);
-    void loadNobiltyCards(std::vector<NobilityCard>& nobleList);
+    void loadNobiltyCards();
     void addNobilityCard(NobilityCard card) {
             AllNobilitycards.push_back(card);
     }

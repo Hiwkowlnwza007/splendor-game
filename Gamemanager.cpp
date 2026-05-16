@@ -1,4 +1,5 @@
 #include "Gamemanager.h"
+#include "Cardgroup.h"
 #include <iostream>
 #include <fstream>   // ตัวอ่านไฟล์
 #include <sstream>   // ตัวหั่นข้อความ
@@ -7,7 +8,7 @@
 #include <random>
 #include <chrono>
 #include <string>
-#include <vector>
+#include <vector> 
 
 void Gamemanager::loadDevelopmentCards(Cardgroup& deck) {
     std::ifstream file("dev_cards.csv");
@@ -64,7 +65,7 @@ void Gamemanager::loadDevelopmentCards(Cardgroup& deck) {
     std::cout << "โหลดไพ่พัฒนาเสร็จสิ้น" << std::endl;
 }
 
-void Gamemanager::loadNobiltyCards(std::vector<NobilityCard>& nobleList){
+void Gamemanager::loadNobiltyCards(){
     std::ifstream file("nob_cards.csv");
     std::string line;
 
@@ -110,10 +111,10 @@ void Gamemanager::setupgame(){
     //รับค่าจำนวนคน
     int num_player;
     while(true){
-        std::cout << "Please enter the number of player [1-4] : ";
+        std::cout << "[System]---Please enter the number of player [1-4] : ";
         std::cin >>num_player;
         if(std::cin.fail() || num_player < 1 || num_player > 4){
-            std::cout << "Wrong number of player" << std::endl;
+            std::cout << "[System]---Wrong number of player" << std::endl;
             std::cin.clear();
             //std::cin.ignore( จำนวนสูงสุดที่จะกวาด , สัญลักษณ์ที่จะให้หยุดกวาด );
             //std::numeric_limits<std::streamsize>::max()บอกว่าเอาจนอนันต์
@@ -127,7 +128,7 @@ void Gamemanager::setupgame(){
     //ตั้งชื่อ
     for(int i=0;i<num_player;++i){
         std::string tempname;
-        std::cout << "Enter name for Player " <<(i+1)<<" : ";
+        std::cout << "[System]---Enter name for Player " <<(i+1)<<" : ";
         std::cin >> tempname;
 
         Player newplayer;
@@ -135,6 +136,25 @@ void Gamemanager::setupgame(){
         players.push_back(newplayer);
     }
 
+    std::cout << "[System]---Preparing the game ";
+    Deck dek; // alldevelopmentcard-90
+    loadDevelopmentCards(dek); 
+
+    loadNobiltyCards();
+    //shuffle nobility
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    auto rng = std::default_random_engine(seed);
+    std::shuffle(AllNobilitycards.begin(), AllNobilitycards.end(), rng);
+
+    dek.shuffle();
+    board.setupGems(num_player);
+
+    nowplayerindex = 0;
+    isgameover = false;
+
+    std::cout << "[System]---Setup Complete! Ready to Play! " << std::endl;
+
+    board.setupCards(dek.Tier1, dek.Tier2, dek.Tier3, AllNobilitycards, num_player);
     //สับไพ่
 
     //setupcode
