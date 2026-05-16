@@ -15,6 +15,7 @@ private:
     Board board;
     bool isgameover = false;
     int nowplayerindex = 0;
+    int num_player;
 public:
     void setupgame();
     void startgame();

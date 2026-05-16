@@ -25,10 +25,11 @@ void Gamemanager::loadDevelopmentCards(Cardgroup& deck) {
         std::stringstream ss(line);
         std::string temp;
 
-        int t, s, w, b, g, r, k;
+        int id, t, s, w, b, g, r, k;
         std::string bonusStr; // เรายังต้องอ่านช่องโบนัสเป็นข้อความมาก่อน
 
         // หั่นข้อมูลจาก CSV ปกติ
+        std::getline(ss, temp, ','); id = std::stoi(temp);
         std::getline(ss, temp, ','); t = std::stoi(temp);
         std::getline(ss, temp, ','); s = std::stoi(temp);
         std::getline(ss, bonusStr, ',');
@@ -80,9 +81,10 @@ void Gamemanager::loadNobiltyCards(){
         std::stringstream ss(line);
         std::string temp;
 
-        int s, w, b, g, r, k;
+        int id, s, w, b, g, r, k;
 
         // หั่นข้อมูลจาก CSV ปกติ
+        std::getline(ss, temp, ','); id = std::stoi(temp);
         std::getline(ss, temp, ','); s = std::stoi(temp);
         std::getline(ss, temp, ','); w = std::stoi(temp);
         std::getline(ss, temp, ','); b = std::stoi(temp);
@@ -109,7 +111,7 @@ void Gamemanager::loadNobiltyCards(){
 
 void Gamemanager::setupgame(){
     //รับค่าจำนวนคน
-    int num_player;
+    
     while(true){
         std::cout << "[System]---Please enter the number of player [1-4] : ";
         std::cin >>num_player;
@@ -154,20 +156,72 @@ void Gamemanager::setupgame(){
 
     std::cout << "[System]---Setup Complete! Ready to Play! " << std::endl;
 
-    board.setupCards(dek.Tier1, dek.Tier2, dek.Tier3, AllNobilitycards, num_player);
+    board.setupCards(dek.GetTier1(), dek.GetTier2(), dek.GetTier3(), AllNobilitycards, num_player);
     //สับไพ่
 
     //setupcode
 }
 
 void Gamemanager::startgame(){
+    setupgame();
+    while(isgameover == false){
+        std::cout << "\n=============================================" << std::endl;
+        std::cout << ">>> It's " << players[nowplayerindex].getname() << "'s turn! <<<" << std::endl;
+        std::cout << "=============================================\n" << std::endl;
+        
+        wincheck();
+    }
+    winnerdeclare();
     //startcode
 }
 
 void Gamemanager::wincheck(){
+    if(nowplayerindex == num_player-1){
+        for(int i=0;i<players.size();i++){
+            if(players[i].GetScore()>=15){
+                isgameover=true;
+                break;
+            }
+        }
+    }
+    
+
     //wincode
 }
 
 void Gamemanager::winnerdeclare(){
+    std::vector<Player> score15;
+    for (int i = 0; i < players.size(); i++) {
+        if (players[i].GetScore() >= 15) { 
+            score15.push_back(players[i]);
+        }
+    }
+
+    if (score15.size() == 1) {
+        std::cout << "\n=============================================" << std::endl;
+        std::cout << " 🎉 WINNER IS : " << score15[0].GetName() << " !!! 🎉" << std::endl;
+        std::cout << "=============================================\n" << std::endl;
+    }
+
+    else if (score15.size() > 1) {
+        std::cout << "\n[System]---Tie breaker triggered! Checking development cards..." << std::endl;
+        
+        Player winner = score15[0];
+        int min_cards = winner.cardonhand.sizecard(); 
+
+        for (int i = 1; i < score15.size(); i++) {
+            int current_cards = score15[i].cardonhand.sizecard();
+            
+            if (current_cards < min_cards) {
+                winner = score15[i];
+                min_cards = current_cards;
+            }
+        }
+
+        std::cout << "\n=============================================" << std::endl;
+        std::cout << " 🎉 WINNER IS : " << winner.GetName() << " !!! 🎉" << std::endl;
+        std::cout << " (Won by fewest cards: " << min_cards << " cards!)" << std::endl;
+        std::cout << "=============================================\n" << std::endl;
+    }
     //winnerdeclarecode
 }
