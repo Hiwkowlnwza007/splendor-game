@@ -56,7 +56,7 @@ void Gamemanager::loadDevelopmentCards(Cardgroup& deck) {
         else if (bonusStr == "Black") cardBonus.Black = 1;
 
         // 🔥 3. สร้างไพ่ และยัดข้อมูลลงไพ่
-        DevelopmentCard newCard(s, cardCost, cardBonus, t);
+        DevelopmentCard newCard(id,s, cardCost, cardBonus, t);
 
         // 📦 ยัดการ์ดลงเด็ค
         deck.addcard(newCard);
@@ -99,7 +99,7 @@ void Gamemanager::loadNobiltyCards(){
         cardCost.Red = r;
         cardCost.Black = k;
 
-        NobilityCard newNoble(s, cardCost);
+        NobilityCard newNoble(id,s, cardCost);
 
         AllNobilitycards.push_back(newNoble);
     }
@@ -168,7 +168,7 @@ void Gamemanager::startgame(){
         std::cout << "\n=============================================" << std::endl;
         std::cout << ">>> It's " << players[nowplayerindex].getname() << "'s turn! <<<" << std::endl;
         std::cout << "=============================================\n" << std::endl;
-        
+
         wincheck();
     }
     winnerdeclare();
